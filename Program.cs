@@ -24,6 +24,8 @@ namespace timer
                 var specifiedSleepTime = args.Length > 1 ? args[1] : null;
                 var sleepTime = GetSleepTime(specifiedSleepTime);
 
+                Console.WriteLine($"{Environment.NewLine}Starting logging.{Environment.NewLine}");
+
                 using (StreamWriter sw = File.CreateText(fileName))
                 {
                     Log(sw);
@@ -43,11 +45,11 @@ namespace timer
 
         private static string GetFileName(string specifiedName)
         {
-            if (string.IsNullOrWhiteSpace(specifiedName)) 
+            if (string.IsNullOrWhiteSpace(specifiedName) || specifiedName == "default") 
             {
                 var defaultFileName = $"timings-{CurrentTime}.txt";
 
-                Console.WriteLine("No file name specified - using default file naming convention.");
+                Console.WriteLine("No file name specified or 'default' specified - using default file naming convention.");
                 Console.WriteLine($"File name used: {defaultFileName}");
 
                 return defaultFileName;
