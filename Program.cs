@@ -6,9 +6,14 @@ namespace timer
 {
     class Program
     {
+        private const string DefaultFileName = "timings";
+        private const string fileExtension = ".txt";
+        private const int DefaultThreadSleep = 60000;
+
         static void Main(string[] args)
         {
-            var fileName = GetFileName(args.Length > 0 ? args[0] : null);
+            var specifiedName = args.Length > 0 ? args[0] : null;
+            var fileName = GetFileName(specifiedName);
 
             if (File.Exists(fileName)) 
             {
@@ -21,9 +26,12 @@ namespace timer
                     Log(sw);
                 }	
 
+                var specifiedSleepTime = args.Length > 1 ? args[1] : null;
+                var sleepTime = GetSleepTime(specifiedSleepTime);
+
                 while(true) 
                 {
-                    Thread.Sleep(60000);
+                    Thread.Sleep(sleepTime);
 
                     using (StreamWriter sw = File.AppendText(fileName))
                     {
@@ -50,6 +58,23 @@ namespace timer
             Console.WriteLine($"Using specified file name: {specifiedFileName}");
 
             return specifiedFileName;
+        }
+
+        private static int GetSleepTime(string specifiedThreadSleep) 
+        {
+            if (!string.IsNullOrWhiteSpace(specifiedThreadSleep))
+            {
+                var validTime = int.TryParse(specifiedThreadSleep, out var specifiedAsInt);
+                if (validTime) 
+                {
+                    Console.WriteLine($"Specified thread sleep time of {specifiedAsInt}ms is valid and will be used.");
+                    return specifiedAsInt;
+                }
+            }
+
+            Console.WriteLine($"Thread sleep time not specified or invalid. Using default value of {DefaultThreadSleep}ms.");
+            return DefaultThreadSleep;
+            
         }
 
         private static void Log(StreamWriter sw) 
