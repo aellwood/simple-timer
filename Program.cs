@@ -6,16 +6,13 @@ namespace timer
 {
     class Program
     {
-        private const string FileName = "timings";
-        private const string FileExtension = "txt";
-
         static void Main(string[] args)
         {
-            var fileName = $"{FileName}-{CurrentTime}.{FileExtension}";
+            var fileName = GetFileName(args.Length > 0 ? args[0] : null);
 
             if (File.Exists(fileName)) 
             {
-                Console.WriteLine($"{fileName} already exists");
+                Console.WriteLine($"{fileName} file name already exists");
             }
             else 
             {
@@ -36,9 +33,32 @@ namespace timer
             }
         }
 
+        private static string GetFileName(string specifiedName)
+        {
+            if (string.IsNullOrWhiteSpace(specifiedName)) 
+            {
+                var defaultFileName = $"timings-{CurrentTime}.txt";
+
+                Console.WriteLine("No file name specified - using default file naming convention.");
+                Console.WriteLine($"File name used: {defaultFileName}");
+
+                return defaultFileName;
+            }
+
+            var specifiedFileName = $"{specifiedName}.txt";
+
+            Console.WriteLine($"Using specified file name: {specifiedFileName}");
+
+            return specifiedFileName;
+        }
+
         private static void Log(StreamWriter sw) 
         {
-            sw.WriteLine(CurrentTime);
+            var currentTime = CurrentTime;
+
+            Console.WriteLine(currentTime);
+
+            sw.WriteLine(currentTime);
         }
 
         private static TimeOnly CurrentTime => TimeOnly.FromDateTime(DateTime.UtcNow);
