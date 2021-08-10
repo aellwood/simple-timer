@@ -6,10 +6,13 @@ namespace timer
 {
     class Program
     {
-        private const string fileName = "timings.txt";
+        private const string FileName = "timings";
+        private const string FileExtension = "txt";
 
         static void Main(string[] args)
         {
+            var fileName = $"{FileName}-{CurrentTime}.{FileExtension}";
+
             if (File.Exists(fileName)) 
             {
                 Console.WriteLine($"{fileName} already exists");
@@ -35,7 +38,9 @@ namespace timer
 
         private static void Log(StreamWriter sw) 
         {
-            sw.WriteLine(TimeOnly.FromDateTime(DateTime.UtcNow));
+            sw.WriteLine(CurrentTime);
         }
+
+        private static TimeOnly CurrentTime => TimeOnly.FromDateTime(DateTime.UtcNow);
     }
 }
