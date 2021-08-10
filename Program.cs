@@ -21,15 +21,15 @@ namespace timer
             }
             else 
             {
+                var specifiedSleepTime = args.Length > 1 ? args[1] : null;
+                var sleepTime = GetSleepTime(specifiedSleepTime);
+
                 using (StreamWriter sw = File.CreateText(fileName))
                 {
                     Log(sw);
                 }	
 
-                var specifiedSleepTime = args.Length > 1 ? args[1] : null;
-                var sleepTime = GetSleepTime(specifiedSleepTime);
-
-                while(true) 
+                while (true) 
                 {
                     Thread.Sleep(sleepTime);
 
