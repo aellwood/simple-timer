@@ -7,13 +7,13 @@ namespace timer
     class Program
     {
         private const string DefaultFileName = "timings";
-        private const string fileExtension = ".txt";
+        private const string FileExtension = ".txt";
         private const int DefaultThreadSleep = 60000;
 
         static void Main(string[] args)
         {
-            var specifiedName = args.Length > 0 ? args[0] : null;
-            var fileName = GetFileName(specifiedName);
+            var fileNameArg = args.Length > 0 ? args[0] : null;
+            var fileName = GetFileName(fileNameArg);
 
             if (File.Exists(fileName)) 
             {
@@ -21,8 +21,8 @@ namespace timer
             }
             else 
             {
-                var specifiedSleepTime = args.Length > 1 ? args[1] : null;
-                var sleepTime = GetSleepTime(specifiedSleepTime);
+                var sleepTimeArg = args.Length > 1 ? args[1] : null;
+                var sleepTime = GetSleepTime(sleepTimeArg);
 
                 Console.WriteLine($"{Environment.NewLine}Starting logging.{Environment.NewLine}");
 
@@ -43,9 +43,9 @@ namespace timer
             }
         }
 
-        private static string GetFileName(string specifiedName)
+        private static string GetFileName(string fileNameArg)
         {
-            if (string.IsNullOrWhiteSpace(specifiedName) || specifiedName == "default") 
+            if (string.IsNullOrWhiteSpace(fileNameArg) || fileNameArg == "default") 
             {
                 var defaultFileName = $"timings-{CurrentTime}.txt";
 
@@ -55,24 +55,24 @@ namespace timer
                 return defaultFileName;
             }
 
-            var specifiedFileName = $"{specifiedName}.txt";
+            var customFileName = $"{fileNameArg}.txt";
 
-            Console.WriteLine($"Using specified file name: {specifiedFileName}");
+            Console.WriteLine($"Using specified file name: {customFileName}");
 
-            return specifiedFileName;
+            return customFileName;
         }
 
-        private static int GetSleepTime(string specifiedThreadSleep) 
+        private static int GetSleepTime(string sleepArg) 
         {
-            if (!string.IsNullOrWhiteSpace(specifiedThreadSleep))
+            if (!string.IsNullOrWhiteSpace(sleepArg))
             {
-                var isValidTime = int.TryParse(specifiedThreadSleep, out var specifiedAsInt);
+                var isValidTime = int.TryParse(sleepArg, out var sleep);
 
                 if (isValidTime) 
                 {
-                    Console.WriteLine($"Specified thread sleep time of {specifiedAsInt}ms is valid and will be used.");
+                    Console.WriteLine($"Specified thread sleep time of {sleep}ms is valid and will be used.");
 
-                    return specifiedAsInt;
+                    return sleep;
                 }
             }
 
