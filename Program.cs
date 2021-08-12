@@ -66,9 +66,9 @@ namespace timer
         {
             if (!string.IsNullOrWhiteSpace(sleepArg))
             {
-                var isValidTime = int.TryParse(sleepArg, out var sleep);
+                var isValidDuration = int.TryParse(sleepArg, out var sleep);
 
-                if (isValidTime) 
+                if (isValidDuration) 
                 {
                     Console.WriteLine($"Specified thread sleep time of {sleep}ms is valid and will be used.");
 
