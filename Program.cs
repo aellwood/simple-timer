@@ -47,7 +47,7 @@ namespace timer
         {
             if (string.IsNullOrWhiteSpace(fileNameArg) || fileNameArg == "default") 
             {
-                var defaultFileName = $"timings-{CurrentTime}.txt";
+                var defaultFileName = $"timings-{CurrentTime.ToString().Replace(":", ".")}.txt";
 
                 Console.WriteLine("No file name specified or 'default' specified - using default file naming convention.");
                 Console.WriteLine($"File name used: {defaultFileName}");
