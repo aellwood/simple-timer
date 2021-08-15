@@ -45,11 +45,13 @@ namespace timer
 
         private static string GetFileName(string fileNameArg)
         {
-            if (string.IsNullOrWhiteSpace(fileNameArg) || fileNameArg == "default") 
+            if (string.IsNullOrWhiteSpace(fileNameArg) || 
+                fileNameArg.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || 
+                fileNameArg == "default") 
             {
                 var defaultFileName = $"timings-{CurrentTime.ToString().Replace(":", ".")}.txt";
 
-                Console.WriteLine("No file name specified or 'default' specified - using default file naming convention.");
+                Console.WriteLine("No file name specified, invalid file name or 'default' specified - using default file naming convention.");
                 Console.WriteLine($"File name used: {defaultFileName}");
 
                 return defaultFileName;
