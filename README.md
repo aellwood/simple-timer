@@ -5,7 +5,7 @@ Just a timer which logs results in a persistent way.
 
 If you're using one of the executables included in a release, you will need the [.NET 6.0 runtime](https://dotnet.microsoft.com/download/dotnet/6.0) installed. 
 
-However, it may just be easier to clone the repo and use the `dotnet run` command instead which would require you to have the [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) installed. I would highly recommend going this route on macOS as running unsigned code as part of an executable is a nightmare currently.
+However, it may just be easier to clone the repo and use the `dotnet run` command instead which would require you to have the [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) installed. I would highly recommend going this route on macOS as running unsigned code as part of an executable is a nightmare in more recent OS versions.
 
 ## Usage
 
