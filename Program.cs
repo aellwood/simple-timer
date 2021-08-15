@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-
-namespace timer
+﻿namespace timer
 {
     class Program
     {
